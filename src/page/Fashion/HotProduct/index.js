@@ -1,10 +1,16 @@
 import Heading from "../Heading"
-import React from "react"
-import {useSelector}  from "react-redux";
+import React, { useEffect } from "react"
+import {useDispatch, useSelector}  from "react-redux";
 import ProductCard from "../../../components/Common/Product/ProductCard"; 
+import { fetchProducts } from "../../../app/slices/product";
 const HotProduct = () => {
      
-         let TumUrunler =  useSelector((state)=> state.products.products);
+    const dispatch = useDispatch();
+    let TumUrunler =  useSelector((state)=> state.products.products);
+
+    useEffect(() => {
+        dispatch(fetchProducts())
+    }, [dispatch]);
 
     return(
         <>

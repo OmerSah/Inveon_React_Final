@@ -8,6 +8,5 @@ export const store = configureStore ( {
         products : productsReducer,
         user : userReducer,
         settings : settingsReducer
-
     }
 })

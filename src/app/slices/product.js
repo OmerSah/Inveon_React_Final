@@ -1,7 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { ProductData } from "../data/ProductData";
 import Swal from "sweetalert2";
+import axios from "axios";
 
+export const fetchProducts = createAsyncThunk("fetchProducts", async () => {
+    console.log("fetch_products")
+    const res = await axios.get("https://localhost:5050/api/products");
+    return res;
+});
 
 const productsSlice = createSlice({
     name: 'products',
@@ -10,7 +16,8 @@ const productsSlice = createSlice({
         carts: ProductData.slice(2, 4),
         favorites: ProductData.slice(1, 4),
         single: null,  // her bir ürün temsil edelr
-
+        isLoading: true,
+        isError: false
     },
     reducers: {
         //sepete ürün eklemek için kullanılacak
@@ -88,6 +95,26 @@ const productsSlice = createSlice({
             state.favorites = [] // state içindeki favori arrayını temizlemiş oluyor 
         },
 
+    },
+    extraReducers: (builder) => {
+        builder.addCase(fetchProducts.fulfilled, (state, action) => {
+            console.log("Product Fetch Bitti")
+            state.isLoading = false
+            state.isError = false
+            state.products = action.payload.data.result;
+            console.log(action.payload.data.result)
+        })
+        builder.addCase(fetchProducts.rejected, (state, action) => {
+            console.log("Product Fetch Hata")
+            state.isError = true
+            state.isLoading = false
+            console.log(action.payload)
+        })
+        builder.addCase(fetchProducts.pending, (state, action) => {
+            console.log("Product Fetch Devam")
+            state.isLoading = true
+            console.log(action.payload)
+        })
     }
 })
 

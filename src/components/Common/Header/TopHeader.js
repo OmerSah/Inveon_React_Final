@@ -4,8 +4,9 @@ import avater from '../../../assets/img/common/avater.png'
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom"
 import Swal from 'sweetalert2';
+import userManager from '../../../userManager';
 
-const TopHeader = () => {
+const TopHeader = (props) => {
     let dispatch = useDispatch();
     const history = useNavigate()
 
@@ -13,11 +14,20 @@ const TopHeader = () => {
     let user = useSelector((state) => state.user.user);
 
     const cikisYap = () => {
-
         console.log("logouta tiklandi");
+        userManager.signoutRedirect();
+        userManager.removeUser();
         dispatch({ type: "user/logout" })
         history("/");
     }
+    
+    const login = () => {
+        console.log(props.path)
+        // pass the current path to redirect to the correct page after successfull login
+        userManager.signinRedirect({
+          data: {path: "/"},
+        });
+      };
     return (
         <>
             <section id="top_header">
@@ -34,7 +44,7 @@ const TopHeader = () => {
                                     !status ?
                                         <ul className="right_list_fix">
 
-                                            <li><Link to="/login"><i className="fa fa-user"></i>
+                                            <li><Link onClick={() => login()}><i className="fa fa-user"></i>
                                                 Giriş Yap</Link></li>
                                             <li><Link to="/register"><i className="fa fa-lock"></i>
                                                 Kayıt Ol</Link></li>
