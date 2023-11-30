@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 const CartViewTwo = () => {
 
     let dispatch = useDispatch();
-    let carts = useSelector((state) => state.products.carts);
+    let carts = useSelector((state) => state.products.cartDetails);
     // Remove Product
     const rmProduct = (id) => {
         dispatch({ type: "products/removeCart", payload: { id } });
@@ -46,14 +46,14 @@ const CartViewTwo = () => {
                                                 {carts.map((data, index) => (
                                                     <tr key={index}>
                                                         <td className="product_thumb">
-                                                            <Link to={`/product-details-one/${data.id}`}>
-                                                                <img src={data.img} alt="img" />
+                                                            <Link to={`/product-details-two/${data.product.productId}`}>
+                                                                <img src={data.product.img} alt="img" />
                                                             </Link>
                                                         </td>
                                                         <td className="product_name">
-                                                            <Link to={`/product-details-one/${data.id}`}> {data.title}</Link>
+                                                            <Link to={`/product-details-two/${data.product.productId}`}> {data.product.title}</Link>
                                                         </td>
-                                                        <td className="product-price">${data.price}.00</td>
+                                                        <td className="product-price">${data.product.price}.00</td>
                                                         <td className="product_quantity">
                                                             <div className="plus-minus-input">
                                                                 <div className="input-group-button">
@@ -69,8 +69,8 @@ const CartViewTwo = () => {
                                                                 </div>
                                                             </div>
                                                         </td>
-                                                        <td className="product_total">${data.price * (data.quantity || 1)}.00</td>
-                                                        <td className="product_remove"><a href="#!" onClick={() => rmProduct(data.id)} style={{ 'cursor': 'pointer' }}><i className="fa fa-trash text-danger"></i></a></td>
+                                                        <td className="product_total">${data.product.price * (data.count || 1)}.00</td>
+                                                        <td className="product_remove"><a href="#!" onClick={() => rmProduct(data.product.productId)} style={{ 'cursor': 'pointer' }}><i className="fa fa-trash text-danger"></i></a></td>
                                                     </tr>
                                                 ))}
 

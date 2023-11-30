@@ -3,6 +3,8 @@ import { connect, useDispatch } from 'react-redux';
 import userManager from './../userManager';
 import { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+import { getFavorites, getUserCart } from '../app/slices/product';
+import axios from 'axios';
 
 const CallbackPage = () => {
     const navigate = useNavigate();
@@ -11,12 +13,10 @@ const CallbackPage = () => {
     const successCallback = (user) => {
         // get the user's previous location, passed during signinRedirect()
         const redirectPath = user.state.path;
-        const userProfile = {
-            name: user.profile.name,
-            role: user.profile.role,
-            email: user.profile.preferred_username
-        }    
-        dispatch({ type: "user/login", payload: { user: userProfile, status: true } })
+        dispatch({ type: "user/login", payload: { user: user, status: true } })
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + user.access_token;
+        dispatch(getUserCart(user.profile.sub))
+        dispatch(getFavorites(user.profile.sub))
         navigate(redirectPath);
     };
 

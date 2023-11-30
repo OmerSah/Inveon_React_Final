@@ -4,7 +4,9 @@
 /node_modules
 /.pnp
 .pnp.js
-
+/.cert
+mkcert
+mkcert-v1.4.4-linux-amd64
 # testing
 /coverage
 

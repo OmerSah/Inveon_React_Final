@@ -2,19 +2,20 @@ import React from "react";
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
 import img from '../../assets/img/common/empty-cart.png'
+import { removeFromFavorites } from "../../app/slices/product";
 
 const WishArea = () => {
     let dispatch = useDispatch();
     let favorilerdekiUrunler = useSelector((state) => state.products.favorites);
+    let user = useSelector((state) => state.user.user);
     // Remove from Cart
-    const rmProduct = (id) => {
-        dispatch({ type: "products/removeToFav", payload: { id } });
+    const rmProduct = (productId) => {
+        dispatch(removeFromFavorites({ productId, userId: user.id }));
     }
     // Clear
     const clearFav = () => {
         dispatch({ type: "products/clearFav" });
     }
-
 
     return (
         <>
@@ -40,15 +41,15 @@ const WishArea = () => {
                                                 {favorilerdekiUrunler.map((data, index) => (
                                                     <tr key={index}>
                                                         <td className="product_remove">
-                                                            <i className="fa fa-trash text-danger" onClick={() => rmProduct(data.id)} style={{ 'cursor': 'pointer' }}></i>
+                                                            <i className="fa fa-trash text-danger" onClick={() => rmProduct(data.productId)} style={{ 'cursor': 'pointer' }}></i>
                                                         </td>
                                                         <td className="product_thumb">
-                                                            <Link to={`/product-details-one/${data.id}`}>
+                                                            <Link to={`/product-details-two/${data.productId}`}>
                                                                 <img src={data.img} alt="img" />
                                                             </Link>
                                                         </td>
                                                         <td className="product_name">
-                                                            <Link to={`/product-details-one/${data.id}`}>
+                                                            <Link to={`/product-details-two/${data.productId}`}>
                                                                 {data.title}
                                                             </Link>
                                                         </td>

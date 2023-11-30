@@ -1,14 +1,29 @@
 import React, {useState} from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {Link} from "react-router-dom";
 import {AiOutlineHeart} from 'react-icons/ai';
+import { addToCart } from "../../../app/slices/product";
 //Her bir ürünü temsil edecek
 const ProductCard = (props) => {
         let dispatch=  useDispatch();
 
-        const sepeteEkle = async(id) => {
+        let user = useSelector((state) => state.user.user);
+
+        const sepeteEkle = async(product) => {
             console.log("tıklandı");
-            dispatch({type :"products/AddToCart",payload : {id}})
+            const cartHeaderDto = {
+                cart_header: {
+                    user_id: user.id,
+                },
+                cart_details: [
+                    {
+                        count: 1,
+                        product_id: product.id,
+                        product: product
+                    }
+                ]   
+            }
+            dispatch(addToCart(cartHeaderDto))
         }
         
         const favorilereEkle = async(id) => {
@@ -35,11 +50,11 @@ const ProductCard = (props) => {
                      </a>
                  </div>
                  <button type="button" className="add-to-cart offcanvas-toggle" 
-                    onClick={() => sepeteEkle(props.data.id)} >Sepete Ekle</button>
+                    onClick={() => sepeteEkle(props.data)} >Sepete Ekle</button>
              </div>
              <div className="content">
                 <h5 className="title">
-                    <Link to={`/product-details-two/${props.data.id}`}>{props.data.title}</Link>
+                    <Link to={`/product-details-two/${props.data.productId}`}>{props.data.title}</Link>
                 </h5>
                 <span className="price">
                     <span className="new">{props.data.price}.00 TL</span>

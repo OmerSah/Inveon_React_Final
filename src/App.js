@@ -7,8 +7,9 @@ import './assets/css/animate.min.css';
 import './assets/css/color.css';
 import userManager from "./userManager"
 import axios from 'axios';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { getFavorites, getUserCart } from "./app/slices/product";
 
 const Fashion = loadable(() => pMinDelay(import('./page/'), 250), { fallback: <Loader /> });
 const Register = loadable(() => pMinDelay(import('./page/register'), 250), { fallback: <Loader /> });
@@ -27,25 +28,38 @@ const CustomerAddress = loadable(() => pMinDelay(import('./page/my-account/custo
 const CustomerAccountDetails = loadable(() => pMinDelay(import('./page/my-account/customer-account-details'), 250), { fallback: <Loader /> });
 const CallbackPage = loadable(() => pMinDelay(import('./components/CallbackPage'), 250), { fallback: <Loader /> });
 
+
+//  PORT=5011 HTTPS=true SSL_CRT_FILE=./.cert/cert.pem SSL_KEY_FILE=./.cert/key.pem npm start
 function App() {
   const dispatch = useDispatch();
   
+  let lastAddedCartDetail = useSelector((state) => state.products.lastAddedCartDetail);
+  let lastDeletedCartDetail = useSelector((state) => state.products.lastDeletedCartDetail);
+  let user = useSelector((state) => state.user.user);
+  let couponCode = useSelector((state) => state.products.couponCode);
+  let totalDiscount = useSelector((state) => state.products.totalDiscount);
+
   useEffect(() => {
-    userManager.getUser().then(user => {
-      if (user && !user.expired) {
-        console.log(user.access_token)
-        
-        const userProfile = {
-          name: user.profile.name,
-          role: user.profile.role,
-          email: user.profile.preferred_username
-        }  
-        dispatch({ type: "user/login", payload: { user: userProfile, status: true } })
-        // Set the authorization header for axios
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + user.access_token;
-      }
-    });  
-  }, [dispatch]);
+    if (!user.id) {
+      userManager.getUser().then(user => {
+        if (user && !user.expired) {
+          console.log(user.access_token)
+          console.log("profile: ", user.profile)
+          dispatch({ type: "user/login", payload: { user: user, status: true } })
+          dispatch(getUserCart(user.profile.sub))
+          dispatch(getFavorites(user.profile.sub))
+          // Set the authorization header for axios
+          axios.defaults.headers.common['Authorization'] = 'Bearer ' + user.access_token;
+        }
+      });
+    }
+    if (lastAddedCartDetail.cartDetailsId || lastDeletedCartDetail.result) {
+      dispatch(getUserCart(user.id))
+    }
+    if (couponCode &&  !totalDiscount) {
+      dispatch(getUserCart(user.id))
+    }
+  }, [dispatch, lastAddedCartDetail, lastDeletedCartDetail, couponCode]);
 
   return (
     <div >

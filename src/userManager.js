@@ -1,4 +1,5 @@
 import { createUserManager } from 'redux-oidc';
+import { WebStorageStateStore } from 'oidc-client';
 
 const userManagerConfig = {
   client_id: 'inveon',
@@ -11,6 +12,9 @@ const userManagerConfig = {
   filterProtocolClaims: true,
   loadUserInfo: true,
   monitorSession: true,
+  userStore: new WebStorageStateStore({
+    store: localStorage
+  }),
 };
 
 const userManager = createUserManager(userManagerConfig);

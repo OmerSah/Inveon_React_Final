@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom'
 import { useSelector } from "react-redux";
 
 const TotalCart = (props) => {
-    let carts = useSelector((state) => state.products.carts);
+    let carts = useSelector((state) => state.products.cartDetails);
+    let totalDiscount = useSelector((state) => state.products.totalDiscount);
 
     const cartTotal = () => {
         return carts.reduce(function (total, item) {
-            return total + ((item.quantity || 1) * item.price)
+            return total + ((item.count || 1) * item.product.price)
         }, 0)
     }
     return (
@@ -19,17 +20,29 @@ const TotalCart = (props) => {
                         <div className="coupon_inner">
                             <div className="cart_subtotal">
                                 <p>Alt Toplam : </p>
-                                <p className="cart_amount">${cartTotal()}.00</p>
+                                <p className="cart_amount">{cartTotal()}.00</p>
                             </div>
+                            {totalDiscount ? 
+                                <div className="cart_subtotal">
+                                    <p>Toplam İndirim : </p>
+                                    <p className="cart_amount">{totalDiscount}.00 TL</p>
+                                </div> :
+                                <></>
+                            }
                             <div className="cart_subtotal ">
                                 <p>Kargo</p>
-                                <p className="cart_amount"><span>Sabit Fiyat</span> 00 TL</p>
+                                <p className="cart_amount"><span style={{'textDecoration': 'line-through'}} >15.00</span>0.00 TL</p>
                             </div>
                             <a href="#!">Kargo Hesapla</a>
 
                             <div className="cart_subtotal">
                                 <p>Toplam</p>
-                                <p className="cart_amount">${cartTotal()}.00</p>
+                                <p className="cart_amount">
+                                    {totalDiscount ? 
+                                    <span style={{'textDecoration': 'line-through'}}>{cartTotal()}</span>
+                                    : <></> } 
+                                    {cartTotal() - totalDiscount}.00 TL
+                                </p>
                             </div>
                             <div className="checkout_btn">
 
@@ -49,15 +62,26 @@ const TotalCart = (props) => {
                                 <p>Alt Toplam : </p>
                                 <p className="cart_amount">{cartTotal()}.00 TL</p>
                             </div>
+                            {totalDiscount ? 
+                                <div className="cart_subtotal">
+                                    <p>Toplam İndirim : </p>
+                                    <p className="cart_amount">{totalDiscount}.00 TL</p>
+                                </div> :
+                                <></>
+                            }
                             <div className="cart_subtotal ">
-                                <p>Kargo</p>
-                                <p className="cart_amount"><span>Sabit Fiyat</span> 00 TL</p>
+                                <p>Kargo : </p>
+                                <p className="cart_amount"><span style={{'textDecoration': 'line-through'}} >15.00</span>0.00 TL</p>
                             </div>
                             <a href="#!">Kargo Hesapla</a>
-
                             <div className="cart_subtotal">
-                                <p>Toplam</p>
-                                <p className="cart_amount">{cartTotal()}.00 TL</p>
+                                <p>Toplam : </p>
+                                <p className="cart_amount">
+                                    {totalDiscount ? 
+                                    <span style={{'textDecoration': 'line-through'}}>{cartTotal()}</span>
+                                    : <></> } 
+                                    {cartTotal() - totalDiscount}.00 TL
+                                </p>
                             </div>
                             <div className="checkout_btn">
 

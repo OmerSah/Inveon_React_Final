@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import logo from "../../../assets/img/logo.png"
 import { Link } from "react-router-dom";
 import { MenuData } from "./MenuData";
@@ -9,24 +9,28 @@ import svg from '../../../assets/img/svg/cancel.svg'
 import logoWhite from '../../../assets/img/logo-white.png'
 import svgsearch from '../../../assets/img/svg/search.svg'
 import Swal from 'sweetalert2'
+import { removeFromCart, removeFromFavorites } from '../../../app/slices/product';
 const Header = () => {
-    let carts = useSelector((state) => state.products.carts);
+    let carts = useSelector((state) => state.products.cartDetails);
     let favorites = useSelector((state) => state.products.favorites);
+    let totalDiscount = useSelector((state) => state.products.totalDiscount);
+    let user = useSelector((state) => state.user.user);
+
     const [click, setClick] = useState(false);
     const history = useNavigate();
     let dispatch = useDispatch();
 
     const rmCartProduct = (id) => {
-        dispatch({ type: "products/removeCart", payload: { id } });
+        dispatch(removeFromCart(id));
     }
 
-    const rmFavProduct = (id) => {
-        dispatch({ type: "products/removeToFav", payload: { id } });
+    const rmFavProduct = (productId) => {
+        dispatch(removeFromFavorites({ productId, userId: user.id }));
     }
 
     const cartTotal = () => {
         return carts.reduce(function (total, item) {
-            return total + ((item.quantity || 1) * item.price)
+            return total + ((item.count || 1) * item.product.price)
         }, 0)
     }
 
@@ -296,26 +300,26 @@ const Header = () => {
                         {carts.map((data, index) => (
                             <li className="offcanvas-wishlist-item-single" key={index}>
                                 <div className="offcanvas-wishlist-item-block">
-                                    <Link to={`/product-details-two/${data.id}`}
+                                    <Link to={`/product-details-two/${data.product.productId}`}
                                         className="offcanvas-wishlist-item-image-link" >
-                                        <img src={data.img} alt="img"
+                                        <img src={data.product.img} alt="img"
                                             className="offcanvas-wishlist-image" />
                                     </Link>
                                     <div className="offcanvas-wishlist-item-content">
-                                        <Link to={`/product-details-two/${data.id}`}
-                                            className="offcanvas-wishlist-item-link">{data.title}</Link>
+                                        <Link to={`/product-details-two/${data.product.productId}`}
+                                            className="offcanvas-wishlist-item-link">{data.product.title}</Link>
                                         <div className="offcanvas-wishlist-item-details">
                                             <span className="offcanvas-wishlist-item-details-quantity">
-                                                {data.quantity || 1} x
+                                                {data.count || 1} x
                                             </span>
                                             <span className="offcanvas-wishlist-item-details-price">
-                                                {data.price} TL</span>
+                                                {" " + data.product.price} TL</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="offcanvas-wishlist-item-delete text-right">
                                     <a href="#!" className="offcanvas-wishlist-item-delete"
-                                        onClick={() => rmCartProduct(data.id)}>
+                                        onClick={() => rmCartProduct(data.cartDetailsId)}>
                                         <i className="fa fa-trash"></i></a>
                                 </div>
                             </li>
@@ -323,7 +327,10 @@ const Header = () => {
                     </ul>
                     <div className="offcanvas-cart-total-price">
                         <span className="offcanvas-cart-total-price-text">Toplam :</span>
-                        <span className="offcanvas-cart-total-price-value">{cartTotal()}.00 TL</span>
+                        <span className="offcanvas-cart-total-price-value">
+                            {totalDiscount ? <span style={{'textDecoration': 'line-through'}}>{cartTotal()}</span>: <></> }
+                            &ensp;{cartTotal() - totalDiscount}.00 TL
+                        </span>
                     </div>
                     <ul className="offcanvas-cart-action-button">
                         <li>
@@ -352,13 +359,13 @@ const Header = () => {
                         {favorites.map((data, index) => (
                             <li className="offcanvas-wishlist-item-single" key={index}>
                                 <div className="offcanvas-wishlist-item-block">
-                                    <Link to={`/product-details-one/${data.id}`}
+                                    <Link to={`/product-details-two/${data.productId}`}
                                         className="offcanvas-wishlist-item-image-link" >
                                         <img src={data.img} alt="img"
                                             className="offcanvas-wishlist-image" />
                                     </Link>
                                     <div className="offcanvas-wishlist-item-content">
-                                        <Link to={`/product-details-one/${data.id}`}
+                                        <Link to={`/product-details-two/${data.productId}`}
                                             className="offcanvas-wishlist-item-link">{data.title}</Link>
                                         <div className="offcanvas-wishlist-item-details">
                                             <span className="offcanvas-wishlist-item-details-quantity">1 x
@@ -370,7 +377,7 @@ const Header = () => {
                                 </div>
                                 <div className="offcanvas-wishlist-item-delete text-right">
                                     <a href="#!" className="offcanvas-wishlist-item-delete"
-                                        onClick={() => rmFavProduct(data.id)}><i className="fa fa-trash"></i></a>
+                                        onClick={() => rmFavProduct(data.productId)}><i className="fa fa-trash"></i></a>
                                 </div>
                             </li>
                         ))}

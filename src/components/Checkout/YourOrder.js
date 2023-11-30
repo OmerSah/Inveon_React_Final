@@ -1,6 +1,17 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 import {Link} from "react-router-dom";
 const YourOrder = () => {
+
+    let carts = useSelector((state) => state.products.cartDetails);
+    let totalDiscount = useSelector((state) => state.products.totalDiscount);
+
+    const cartTotal = () => {
+        return carts.reduce(function (total, item) {
+            return total + ((item.count || 1) * item.product.price)
+        }, 0)
+    }
+
     return (
         <>
             <div className="col-lg-6 col-md-6">
@@ -14,28 +25,37 @@ const YourOrder = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td> green Dress For Woman <strong> × 1</strong></td>
-                                <td> 100.00 TL</td>
-                            </tr>
-                            <tr>
-                                <td> V-Neck Dress <strong> × 1</strong></td>
-                                <td> 50.00 TL</td>
-                            </tr>
-                          
+                            {carts.map((data, index) => (
+                                <tr key={index}>
+                                    <td> {data.product.title} <strong> × {" " + data.count || 1}</strong></td>
+                                    <td> {data.product.price * (data.count || 1)}.00 TL</td>
+                                </tr>
+                            ))
+                            }
                         </tbody>
                         <tfoot>
                             <tr>
                                 <th>Alt Toplam</th>
-                                <td>150.00 TL</td>
+                                <td>{cartTotal()}.00 TL</td>
                             </tr>
+                            {totalDiscount ? 
+                                <tr>
+                                    <th>Toplam İndirim</th>
+                                    <td>{totalDiscount}.00 TL</td>
+                                </tr> :
+                                <></>
+                            }
                             <tr>
                                 <th>Kargo</th>
-                                <td><strong>15.00 TL</strong></td>
+                                <td><span style={{'textDecoration': 'line-through'}} >15.00</span>&nbsp;&nbsp;<strong>0.00 TL</strong></td>
                             </tr>
                             <tr className="order_total">
                                 <th>Sipariş Toplamı </th>
-                                <td><strong>165.00 TL</strong></td>
+                                <td>
+                                    {totalDiscount ? <span style={{'textDecoration': 'line-through'}}>{cartTotal()}</span>: <></> }
+                                    &ensp;
+                                    <strong>{cartTotal() - totalDiscount}.00 TL</strong>
+                                </td>
                             </tr>
                         </tfoot>
                     </table>

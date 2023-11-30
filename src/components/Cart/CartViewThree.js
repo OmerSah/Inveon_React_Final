@@ -26,12 +26,12 @@ const CartViewThree = () => {
                                                 <td className="product_remove"><a href="#!"><i className="fa fa-trash"></i></a>
                                                 </td>
                                                 <td className="product_thumb">
-                                                    <Link to="product-details-one/1">
+                                                    <Link to="product-details-two/1">
                                                         <img src={img1} alt="img" />
                                                     </Link>
                                                 </td>
                                                 <td className="product_name">
-                                                    <Link to="product-details-one/1">Handbag fringilla</Link>
+                                                    <Link to="product-details-two/1">Handbag fringilla</Link>
                                                 </td>
                                                 <td className="product-price">$65.00</td>
                                                 <td className="product_quantity">
@@ -44,12 +44,12 @@ const CartViewThree = () => {
                                                 <td className="product_remove"><a href="#!"><i className="fa fa-trash"></i></a>
                                                 </td>
                                                 <td className="product_thumb">
-                                                    <Link to="product-details-one/1">
+                                                    <Link to="product-details-two/1">
                                                         <img src={img1} alt="img" />
                                                     </Link>
                                                 </td>
                                                 <td className="product_name">
-                                                    <Link to="product-details-one/1">Handbag fringilla</Link>
+                                                    <Link to="product-details-two/1">Handbag fringilla</Link>
                                                 </td>
                                                 <td className="product-price">$65.00</td>
                                                 <td className="product_quantity">
