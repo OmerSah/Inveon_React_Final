@@ -9,7 +9,7 @@ import userManager from "./userManager"
 import axios from 'axios';
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getFavorites, getUserCart } from "./app/slices/product";
+import { getFavorites, getOrders, getUserCart } from "./app/slices/product";
 
 const Fashion = loadable(() => pMinDelay(import('./page/'), 250), { fallback: <Loader /> });
 const Register = loadable(() => pMinDelay(import('./page/register'), 250), { fallback: <Loader /> });
@@ -48,6 +48,7 @@ function App() {
           dispatch({ type: "user/login", payload: { user: user, status: true } })
           dispatch(getUserCart(user.profile.sub))
           dispatch(getFavorites(user.profile.sub))
+          dispatch(getOrders(user.profile.sub))
           // Set the authorization header for axios
           axios.defaults.headers.common['Authorization'] = 'Bearer ' + user.access_token;
         }

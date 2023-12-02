@@ -21,6 +21,7 @@ const ProductDetailsTwo = () => {
     let user = useSelector((state) => state.user.user);
 
     useEffect(() => {
+        setCount(1)
         dispatch(fetchProduct(id))
     }, [dispatch, id]);
 

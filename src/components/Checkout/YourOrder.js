@@ -1,10 +1,25 @@
-import React from 'react'
-import { useSelector } from 'react-redux';
-import {Link} from "react-router-dom";
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import {Link, useNavigate} from "react-router-dom";
+import { checkout } from '../../app/slices/product';
+import { useFormContext } from 'react-hook-form';
+
 const YourOrder = () => {
+
+    const methods = useFormContext()
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     let carts = useSelector((state) => state.products.cartDetails);
     let totalDiscount = useSelector((state) => state.products.totalDiscount);
+    let user = useSelector((state) => state.user.user);
+    let couponCode = useSelector((state) => state.products.couponCode);
+
+    useEffect(() => {
+        if (carts.length === 0) {
+            navigate("/order-complete")
+        }
+    }, [carts]);
 
     const cartTotal = () => {
         return carts.reduce(function (total, item) {
@@ -12,6 +27,21 @@ const YourOrder = () => {
         }, 0)
     }
 
+    const onSubmit = methods.handleSubmit(async (data) => {
+        const totalAmount = cartTotal();
+        const checkoutModel = {
+            ...data,
+            cartHeaderId: carts[0].cartHeaderId,
+            cartDetails: carts,
+            userId: user.id,
+            couponCode,
+            discountTotal: totalDiscount,
+            orderTotal: totalAmount - totalDiscount,
+            cartTotalItems: carts.length,
+        }
+        await dispatch(checkout(checkoutModel))
+    })
+    
     return (
         <>
             <div className="col-lg-6 col-md-6">
@@ -107,8 +137,8 @@ const YourOrder = () => {
 
                     <div className="order_button pt-3">
         
-                        <Link to="/order-complete" className="theme-btn-one btn-black-overlay btn_sm">
-                                Sipariş Ver</Link>
+                        <button onClick={onSubmit} className="theme-btn-one btn-black-overlay btn_sm">
+                                Sipariş Ver</button>
                     </div>
                 </div>
             </div>

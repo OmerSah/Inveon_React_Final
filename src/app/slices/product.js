@@ -106,6 +106,22 @@ export const removeFromFavorites = createAsyncThunk("removeFromFavorites", async
     return res;
 });
 
+export const checkout = createAsyncThunk("checkout", async (checkoutInfo) => {
+    console.log("checkout")
+    let res = await axios.post(`https://localhost:5050/api/cartc`, checkoutInfo)
+    if (res.data.isSuccess) { 
+        const { userId } = checkoutInfo;
+        const orders = await axios.get(`https://localhost:5050/api/orders/` + userId)
+        res.orders = orders.data.result
+    }
+    return res;
+});
+
+export const getOrders = createAsyncThunk("getOrders", async (userId) => {
+    console.log("get_orders")
+    let res = await axios.get(`https://localhost:5050/api/orders/` + userId)
+    return res;
+});
 
 const productsSlice = createSlice({
     name: 'products',
@@ -119,6 +135,7 @@ const productsSlice = createSlice({
         lastDeletedCartDetail: {},
         cartDetails: [],
         totalDiscount: 0,
+        orders: [],
         couponCode: '',
     },
     reducers: {
@@ -479,6 +496,53 @@ const productsSlice = createSlice({
         })
         builder.addCase(removeFromFavorites.pending, (state, action) => {
             console.log("Remove From Favorites Devam")
+        })
+
+        builder.addCase(checkout.fulfilled, (state, action) => {
+            console.log("Checkout Bitti")
+            const isSuccess = action.payload.data.isSuccess
+            if (isSuccess) {
+                const orders = action.payload.orders;
+                state.cartDetails = [];
+                state.couponCode = '';
+                state.totalDiscount = 0;
+                state.orders = orders;
+                console.log("Checkout Complete Orders: ", orders)
+                return;
+            }
+            Swal.fire(
+                {
+                    title: 'Başarısız',
+                    text: "Ödeme işlemi gerçekleştirilemedi!",
+                    icon: 'warning',
+                    showConfirmButton: false,
+                    timer: 2000
+                }
+            )
+            console.log(action.payload)
+        })
+        builder.addCase(checkout.rejected, (state, action) => {
+            console.log("Checkout Hata")
+        })
+        builder.addCase(checkout.pending, (state, action) => {
+            console.log("Checkout Devam")
+        })
+
+        builder.addCase(getOrders.fulfilled, (state, action) => {
+            console.log("Get Orders Bitti")
+            const isSuccess = action.payload.data.isSuccess
+            if (isSuccess) {
+                state.orders = action.payload.data.result;
+                console.log("Orders: ", state.orders)
+                return;
+            }
+            console.log(action.payload)
+        })
+        builder.addCase(getOrders.rejected, (state, action) => {
+            console.log("Get Orders Hata")
+        })
+        builder.addCase(getOrders.pending, (state, action) => {
+            console.log("Get Orders Devam")
         })
     }
 })

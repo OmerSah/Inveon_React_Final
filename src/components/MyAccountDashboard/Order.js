@@ -1,6 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux';
+
 const Order = () => {
+    
+    let orders = useSelector((state) => state.products.orders);
+
     return (
         <>
             <div className="myaccount-content">
@@ -9,28 +13,34 @@ const Order = () => {
                     <table>
                         <thead>
                             <tr>
-                                <th>Sipariş</th>
+                                <th>Sipariş No</th>
                                 <th>Tarih</th>
                                 <th>Durum</th>
+                                <th>Ürün Adeti</th>
+                                <th>Toplam İndirim</th>
                                 <th>Toplam</th>
-                                <th></th>
+                                
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>5 Haziran 2005</td>
-                                <td><span className="badge badge-info">Tamamlandı</span></td>
-                                <td>250 TL  </td>
-                                <td><Link to="/order-success" className="view">Görüntüle</Link></td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>1 Mayıs 2018</td>
-                                <td> <span className="badge badge-warning">Devam Ediyor</span></td>
-                                <td>170 TL  </td>
-                                <td><Link to="/order-tracking" className="view">Görüntüle</Link></td>
-                            </tr>
+                            {orders.map((data, index) => (
+                                <tr key={index}>
+                                    <td>{data.orderHeaderId}</td>
+                                    <td>
+                                        {new Intl.DateTimeFormat("tr-TR", {
+                                            year: "numeric",
+                                            month: "long",
+                                            day: "2-digit"
+                                        }).format(new Date(data.orderTime))}
+                                    </td>
+                                    <td><span className="badge badge-info">Tamamlandı</span></td>
+                                    <td>{ data.cartTotalItems }</td>
+                                    <td>{ data.discountTotal } TL</td>
+                                    <td>{ data.orderTotal } TL</td>
+                                   
+                                </tr>
+                            ))
+                            }
                         </tbody>
                     </table>
                 </div>

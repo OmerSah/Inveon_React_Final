@@ -3,7 +3,7 @@ import { connect, useDispatch } from 'react-redux';
 import userManager from './../userManager';
 import { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import { getFavorites, getUserCart } from '../app/slices/product';
+import { getFavorites, getOrders, getUserCart } from '../app/slices/product';
 import axios from 'axios';
 
 const CallbackPage = () => {
@@ -17,6 +17,7 @@ const CallbackPage = () => {
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + user.access_token;
         dispatch(getUserCart(user.profile.sub))
         dispatch(getFavorites(user.profile.sub))
+        dispatch(getOrders(user.profile.sub))
         navigate(redirectPath);
     };
 
