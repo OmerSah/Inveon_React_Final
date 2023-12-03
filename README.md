@@ -1,7 +1,7 @@
 # **E Commerce Application Web Application**
 - Register, login and logout with identity server
-- List, create, update and basket items
-- List, create, update and favoite items
+- List, create, update and delete basket items
+- List, create, update and delete favoite items
 - List past orders
 - Make payment with Iyzico
 - Filter and search procucts
