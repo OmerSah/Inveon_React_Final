@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { ProductData } from "../data/ProductData";
 import Swal from "sweetalert2";
 import axios from "axios";
 
@@ -50,6 +49,25 @@ export const removeFromCart = createAsyncThunk("removeFromCart", async (cartDeta
         'Content-Type' : 'application/json'
     }
     const res = await axios.post("https://localhost:5050/api/cart/RemoveCart", cartDetailsId, { headers: headers });
+    return res;
+});
+
+export const updateCartDetails = createAsyncThunk("updateCartDetails", async ({product, userId}) => {
+    console.log("update_cart_details")
+    let res = await axios.post("https://localhost:5050/api/cart/UpdateDetails", product);
+    if (res.data.isSuccess) {
+        const carts = await axios.get("https://localhost:5050/api/cart/GetCart/" + userId);
+        res.carts = carts.data.result.cartDetails;
+    }
+    return res;
+});
+
+export const clearCart = createAsyncThunk("clearCart", async (userId) => {
+    console.log("clear_cart")
+    const headers = {
+        'Content-Type' : 'application/json'
+    }
+    const res = await axios.post("https://localhost:5050/api/cart/ClearCart", userId, { headers: headers });
     return res;
 });
 
@@ -106,6 +124,12 @@ export const removeFromFavorites = createAsyncThunk("removeFromFavorites", async
     return res;
 });
 
+export const clearFavorites = createAsyncThunk("clearFavorites", async (userId) => {
+    console.log("clear_favorites")
+    const res = await axios.delete("https://localhost:5050/api/favorites/" + userId)
+    return res;
+});
+
 export const checkout = createAsyncThunk("checkout", async (checkoutInfo) => {
     console.log("checkout")
     let res = await axios.post(`https://localhost:5050/api/cartc`, checkoutInfo)
@@ -126,7 +150,7 @@ export const getOrders = createAsyncThunk("getOrders", async (userId) => {
 const productsSlice = createSlice({
     name: 'products',
     initialState: {
-        products: ProductData,
+        products: [],
         favorites: [],
         single: null,  
         isLoading: true,
@@ -291,6 +315,41 @@ const productsSlice = createSlice({
             console.log("Add To Cart Devam")
         })
 
+        builder.addCase(updateCartDetails.fulfilled, (state, action) => {
+            console.log("Update Cart Details Bitti");
+            let isSuccess = action.payload.data.isSuccess;
+            if (isSuccess) {
+                console.log("Cart Deleted: ", action.payload);
+                state.cartDetails = action.payload.carts;
+                Swal.fire(
+                    {
+                        title: 'Başarılı',
+                        text: "Sepetiniz başarıyla güncellendi!",
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 2000
+                    }
+                )
+                return;
+            }
+            Swal.fire(
+                {
+                    title: 'Başarısız',
+                    text: "Sepetiniz güncellenemedi!",
+                    icon: 'warning',
+                    showConfirmButton: false,
+                    timer: 2000
+                }
+            )
+            console.log("Hata: ", action.payload)
+        })
+        builder.addCase(updateCartDetails.rejected, (state, action) => {
+            console.log("Update Cart Details Hata")
+        })
+        builder.addCase(updateCartDetails.pending, (state, action) => {
+            console.log("Update Cart Details Devam")
+        })
+
         builder.addCase(getUserCart.fulfilled, (state, action) => {
             console.log("Get User Cart Bitti");
             let isSuccess = action.payload.data.isSuccess;
@@ -309,6 +368,9 @@ const productsSlice = createSlice({
             console.log(action.payload)
         })
         builder.addCase(getUserCart.rejected, (state, action) => {
+            state.cartDetails = [];
+            state.couponCode = '';
+            state.totalDiscount = 0;
             console.log("Get User Cart Hata")
         })
         builder.addCase(getUserCart.pending, (state, action) => {
@@ -349,6 +411,45 @@ const productsSlice = createSlice({
         })
         builder.addCase(removeFromCart.pending, (state, action) => {
             console.log("Remove From Cart Devam")
+        })
+
+        builder.addCase(clearCart.fulfilled, (state, action) => {
+            console.log("Clear Cart Bitti");
+            let isSuccess = action.payload.data.isSuccess;
+            if (isSuccess) {
+                //sepete eklemek istediğim ürün bilgilerine getirecek ilgili rest servisi çağırılır
+                state.cartDetails = [];
+                state.couponCode = '';
+                state.totalDiscount = 0;
+
+                console.log("Cart Deleted: ", action.payload);
+                Swal.fire(
+                    {
+                        title: 'Başarılı',
+                        text: "Sepetiniz silindi!",
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 2000
+                    }
+                )
+                return;
+            }
+            Swal.fire(
+                {
+                    title: 'Başarısız',
+                    text: "Sepetiniz silinemedi!",
+                    icon: 'warning',
+                    showConfirmButton: false,
+                    timer: 2000
+                }
+            )
+            console.log("Hata: ", action.payload)
+        })
+        builder.addCase(clearCart.rejected, (state, action) => {
+            console.log("Clear Cart Hata")
+        })
+        builder.addCase(clearCart.pending, (state, action) => {
+            console.log("Clear Cart Devam")
         })
 
         builder.addCase(applyCoupon.fulfilled, (state, action) => {
@@ -462,6 +563,40 @@ const productsSlice = createSlice({
         })
         builder.addCase(getFavorites.pending, (state, action) => {
             console.log("Get Favorites Devam")
+        })
+
+        builder.addCase(clearFavorites.fulfilled, (state, action) => {
+            console.log("Clear Favorites Bitti");
+            const isSuccess = action.payload.data.isSuccess
+            if (isSuccess) {
+                state.favorites = [];
+                Swal.fire(
+                    {
+                        title: 'Başarılı',
+                        text: "Favoriler başarıyla silindi!",
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 2000
+                    }
+                )
+                return
+            }
+            Swal.fire(
+                {
+                    title: 'Başarısız',
+                    text: "Favoriler silinemedi!",
+                    icon: 'warning',
+                    showConfirmButton: false,
+                    timer: 2000
+                }
+            )
+            console.log(action.payload)
+        })
+        builder.addCase(clearFavorites.rejected, (state, action) => {
+            console.log("Clear Favorites Hata")
+        })
+        builder.addCase(clearFavorites.pending, (state, action) => {
+            console.log("Clear Favorites Devam")
         })
 
         builder.addCase(removeFromFavorites.fulfilled, (state, action) => {
