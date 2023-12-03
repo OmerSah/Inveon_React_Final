@@ -14,6 +14,7 @@ const YourOrder = () => {
     let totalDiscount = useSelector((state) => state.products.totalDiscount);
     let user = useSelector((state) => state.user.user);
     let couponCode = useSelector((state) => state.products.couponCode);
+    let loading = useSelector((state) => state.products.isCheckoutLoading);
 
     useEffect(() => {
         if (carts.length === 0) {
@@ -136,9 +137,9 @@ const YourOrder = () => {
                     </form>
 
                     <div className="order_button pt-3">
-        
+         
                         <button onClick={onSubmit} className="theme-btn-one btn-black-overlay btn_sm">
-                                Sipariş Ver</button>
+                                Sipariş Ver {loading ? <i className="fas fa-spinner fa-spin"></i> : <></> }</button>
                     </div>
                 </div>
             </div>

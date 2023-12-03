@@ -154,6 +154,7 @@ const productsSlice = createSlice({
         favorites: [],
         single: null,  
         isLoading: true,
+        isCheckoutLoading: false,
         isError: false,
         lastAddedCartDetail: {},
         lastDeletedCartDetail: {},
@@ -638,6 +639,7 @@ const productsSlice = createSlice({
             const isSuccess = action.payload.data.isSuccess
             if (isSuccess) {
                 const orders = action.payload.orders;
+                state.isCheckoutLoading = false
                 state.cartDetails = [];
                 state.couponCode = '';
                 state.totalDiscount = 0;
@@ -657,9 +659,20 @@ const productsSlice = createSlice({
             console.log(action.payload)
         })
         builder.addCase(checkout.rejected, (state, action) => {
+            state.isCheckoutLoading = true
+            Swal.fire(
+                {
+                    title: 'Başarısız',
+                    text: "Ödeme işlemi gerçekleştirilemedi!",
+                    icon: 'warning',
+                    showConfirmButton: false,
+                    timer: 2000
+                }
+            )
             console.log("Checkout Hata")
         })
         builder.addCase(checkout.pending, (state, action) => {
+            state.isCheckoutLoading = true
             console.log("Checkout Devam")
         })
 
