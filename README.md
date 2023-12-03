@@ -1,70 +1,136 @@
-# Getting Started with Create React App
+# **E Commerce Application Web Application**
+- Register, login and logout with identity server
+- List, create, update and basket items
+- List, create, update and favoite items
+- List past orders
+- Make payment with Iyzico
+- Filter and search procucts
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# **Authentication (Identity Server)**
 
-## Available Scripts
+<div align="center">
 
-In the project directory, you can run:
+| Homepage  |
+| ------------- |
+| <img src="https://github.com/OmerSah/Inveon_React_Final/assets/56412838/ba8ac2d3-1f9f-4387-bca7-2fa1bfcbf3c1" /> | 
 
-### `npm start`
+| Register  |
+| ------------- |
+| <img src="https://github.com/OmerSah/Inveon_React_Final/assets/56412838/add73ce7-14e1-4923-b20c-bfa096b0fb37" /> | 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+| Logged In User  | Logout  |
+| ------------- | ------------- |
+| <img src="https://github.com/OmerSah/Inveon_React_Final/assets/56412838/3ca52baa-7860-4954-877e-edd80f84ec07" /> | <img src="https://github.com/OmerSah/Inveon_React_Final/assets/56412838/6442948a-178d-4e45-aede-0fb169d4d0c8" /> |
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+| Login  |
+| ------------- |
+| <img src="https://github.com/OmerSah/Inveon_React_Final/assets/56412838/2a8ac65d-a112-46ed-a714-a927155040fb" /> | 
 
-### `npm test`
+</div>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# **Product**
 
-### `npm run build`
+<div align="center">
+  
+| Product Card | Product Detail |
+| ------------- | ------------- |
+| <img src="https://github.com/OmerSah/Inveon_React_Final/assets/56412838/7f0aee9c-93fe-4ba6-b785-e3f1373a2b4b" /> | <img src="https://github.com/OmerSah/Inveon_React_Final/assets/56412838/04fef199-7f2e-4dfe-aef6-00b2461cfb8b" /> | 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+</div>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# **Favorites**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<div align="center">
 
-### `npm run eject`
+| Add Favorite  | Favorites  |
+| ------------- | ------------- |
+| <img src="https://github.com/OmerSah/Inveon_React_Final/assets/56412838/510fed68-b2f3-42e7-829a-b2f39afc44b5" /> | <img src="https://github.com/OmerSah/Inveon_React_Final/assets/56412838/891044c4-18d2-45ea-9705-888974db1e3e" /> | 
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+| Favorites List  |
+| ------------- |
+| <img src="https://github.com/OmerSah/Inveon_React_Final/assets/56412838/1c69f898-d24a-4638-95f6-52130f7da13d" /> | 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+| Delete Prdouct From Favorites List |
+| ------------- |
+| <img src="https://github.com/OmerSah/Inveon_React_Final/assets/56412838/c06784b6-640e-40dd-a990-0e6248a039bf" /> | 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+| Delete Favorites List |
+| ------------- |
+| <img src="https://github.com/OmerSah/Inveon_React_Final/assets/56412838/721aa8a4-597e-4ad6-b2f4-9de28aa88a05" /> | 
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+</div>
 
-## Learn More
+# **Basket Items**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<div align="center">
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+| Add To Basket  | Basket  |
+| ------------- | ------------- |
+| <img src="https://github.com/OmerSah/Inveon_React_Final/assets/56412838/e0bf3894-6e8e-4be4-8237-c3b9d83ff5fc" /> | <img src="https://github.com/OmerSah/Inveon_React_Final/assets/56412838/b2e1e4c3-4b0f-4e10-b849-a81117e416e8" /> | 
 
-### Code Splitting
+| Basket Item List |
+| ------------- |
+| <img src="https://github.com/OmerSah/Inveon_React_Final/assets/56412838/8443c9de-fe7a-4a79-bc3e-28aa8eaeaa0d" /> | 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+| Update Basket Item Count  | Updated Basket  |
+| ------------- | ------------- |
+| <img src="https://github.com/OmerSah/Inveon_React_Final/assets/56412838/c522da80-4f33-443f-b377-58b415f6ab67" /> | <img src="https://github.com/OmerSah/Inveon_React_Final/assets/56412838/bb032a98-314c-41fd-a566-d2ceb0b9d8a1" /> | 
 
-### Analyzing the Bundle Size
+| Add Coupon  |  Coupon and Discount |
+| ------------- | ------------- | 
+| <img src="https://github.com/OmerSah/Inveon_React_Final/assets/56412838/5bdd5927-55df-4ecc-89c4-2c93602ef632" /> | <img src="https://github.com/OmerSah/Inveon_React_Final/assets/56412838/2972b508-b50f-453f-bc21-e0a403c5f24b" /> <img src="https://github.com/OmerSah/Inveon_React_Final/assets/56412838/95fd2780-bb26-4bd3-8eca-bc7b5c838427" />  | 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+| Delete Basket Items |
+| ------------- |
+| <img src="https://github.com/OmerSah/Inveon_React_Final/assets/56412838/653dc032-deb0-4ce1-aa36-85475ef36ec0" /> | 
 
-### Making a Progressive Web App
+</div>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+# **Checkout and Order**
 
-### Advanced Configuration
+<div align="center">
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+| Checkout Screeen |
+| ------------- |
+| <img src="https://github.com/OmerSah/Inveon_React_Final/assets/56412838/98f92384-33e7-40d3-baaa-ed8c442e2372" /> | 
 
-### Deployment
+| Checkout Validation |
+| ------------- |
+| <img src="https://github.com/OmerSah/Inveon_React_Final/assets/56412838/24d4e1f3-018b-4308-9fb9-c896819b7ddc" /> | 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+| Pending Checkout |
+| ------------- |
+| <img src="https://github.com/OmerSah/Inveon_React_Final/assets/56412838/c11d711e-1b39-4fec-b6e8-92c9ddad0945" /> | 
 
-### `npm run build` fails to minify
+| Completed Order   | Order List  |
+| ------------- | ------------- |
+| <img src="https://github.com/OmerSah/Inveon_React_Final/assets/56412838/28adbcdd-01ca-44ad-8bb2-3f3c7c48c9e2" /> | <img src="https://github.com/OmerSah/Inveon_React_Final/assets/56412838/7ed98edf-c509-4be2-9fd7-81ed28e732f8" /> | 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+|  Completed Order Email   | Iyzico Transaction List  |
+| ------------- | ------------- |
+| <img src="https://github.com/OmerSah/Inveon_React_Final/assets/56412838/bcbb7f62-0aba-4229-9cd6-f10db1e0b3a5" /> | <img src="https://github.com/OmerSah/Inveon_React_Final/assets/56412838/faa5fac4-d9b3-46d3-b96a-69d186b4effd" /> | 
+
+</div>
+
+# **Product Search and Filter**
+
+<div align="center">
+
+| Title Search |
+| ------------- |
+| <img src="https://github.com/OmerSah/Inveon_React_Final/assets/56412838/06386387-70cb-4cad-80dc-11b3a488aa87" /> | 
+
+| Category Filter |
+| ------------- |
+| <img src="https://github.com/OmerSah/Inveon_React_Final/assets/56412838/906909d1-21ce-4730-9460-763653461b3f" /> | 
+
+| Category and Label Filter |
+| ------------- |
+| <img src="https://github.com/OmerSah/Inveon_React_Final/assets/56412838/5a4cc9db-bca3-4765-96c1-e497c87ad2b6" /> | 
+
+| Price Range Filter |
+| ------------- |
+| <img src="https://github.com/OmerSah/Inveon_React_Final/assets/56412838/9e695f0f-5292-4a0d-a58f-76302ecd5a8f" /> | 
+
+</div>
+
