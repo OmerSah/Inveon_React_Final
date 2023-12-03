@@ -2633,17 +2633,6 @@ button {
 /* -------------------------
      Banner Area
 ---------------------------*/
-.bg_1 {
-    background-image: url('../img/furniture/banner/banner1.png');
-}
-
-.bg_2 {
-    background-image: url('../img/furniture/banner/banner2.png');
-}
-
-.bg_3 {
-    background-image: url('../img/furniture/banner/banner3.png');
-}
 
 .background_bg {
     background-position: center center;
@@ -2978,15 +2967,7 @@ button {
 /* -------------------------
   Our Story Area
 ---------------------------*/
-#furniture_story {
-    background-image: url('../img/furniture/common/parallex.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    padding: 150px 0;
-    position: relative;
-}
+
 
 #furniture_story::after {
     content: "";
@@ -3235,17 +3216,7 @@ button {
     transform: translateX(0);
 }
 
-.el_bg_1 {
-    background-image: url('../img/electronics/banner/banner1.png');
-}
 
-.el_bg_2 {
-    background-image: url('../img/electronics/banner/banner2.png');
-}
-
-.el_bg_3 {
-    background-image: url('../img/electronics/banner/banner3.png');
-}
 
 /* --Banner Bottom Area-- */
 .el_banner_bottom {
@@ -7705,12 +7676,7 @@ table {
 -------------------------------*/
 
 /* --Banner-- */
-#grocery_banner {
-    background-image: url('../img/grocery/banner/grocery_banner_bg.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    padding: 50px 0;
-}
+
 
 .banner_last_img {
     padding-bottom: 25px;
@@ -7986,11 +7952,6 @@ table {
     margin-bottom: 25px;
 }
 
-.grocery_cat_wrapper {
-    background-image: url('../img/grocery/banner/grocery_cta_bg.png');
-    background-repeat: no-repeat;
-    padding-top: 30px;
-}
 
 .grocery_cta_content {
     padding-left: 40px;
@@ -8351,12 +8312,6 @@ table {
 /* ----------------------------
        Jewellary Page
 -------------------------------*/
-#jewellry_banner {
-    background-image: url("../img/jewellary/banner/banner.png");
-    padding: 160px 0;
-    background-size: cover;
-    background-repeat: no-repeat;
-}
 
 .jewellry_banner_text h1 {
     font-size: 65px;
@@ -8530,15 +8485,6 @@ table {
     background: var(--main-theme-color);
 }
 
-#paralex_area {
-    background-image: url("../img/jewellary/banner/paralex.png");
-    padding: 145px 0;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: top center;
-    background-size: cover;
-}
-
 .paralex_text {
     text-align: center;
 }
@@ -8678,12 +8624,6 @@ table {
 
 #baby_trending_product .tabs_center_button {
     padding-bottom: 40px;
-}
-
-#baby_offer_banner {
-    padding: 150px 0;
-    background-image: url("../img/baby-shop/banner/offer_bg.jpg");
-    background-repeat: no-repeat;
 }
 
 .baby_offer_banner_text {

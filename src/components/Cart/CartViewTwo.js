@@ -100,7 +100,7 @@ const CartViewTwo = () => {
                                     <img src={img} alt="img" />
                                     <h2>YOUR CART IS EMPTY</h2>
                                     <h3>Sorry Mate... No Item Found Inside Your Cart!</h3>
-                                    <Link to="/shop" className="btn btn-black-overlay btn_sm">Continue Shopping</Link>
+                                    <Link to="/shop/shop-left-sidebar" className="btn btn-black-overlay btn_sm">Continue Shopping</Link>
                                 </div>
                             </div>
                         </div>

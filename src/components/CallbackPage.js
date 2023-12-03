@@ -3,7 +3,7 @@ import { connect, useDispatch } from 'react-redux';
 import userManager from './../userManager';
 import { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import { getFavorites, getOrders, getUserCart } from '../app/slices/product';
+import { fetchProducts, getFavorites, getOrders, getUserCart } from '../app/slices/product';
 import axios from 'axios';
 
 const CallbackPage = () => {
@@ -18,6 +18,7 @@ const CallbackPage = () => {
         dispatch(getUserCart(user.profile.sub))
         dispatch(getFavorites(user.profile.sub))
         dispatch(getOrders(user.profile.sub))
+        dispatch(fetchProducts())
         navigate(redirectPath);
     };
 
