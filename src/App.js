@@ -40,6 +40,7 @@ function App() {
   let totalDiscount = useSelector((state) => state.products.totalDiscount);
 
   useEffect(() => {
+    dispatch(fetchProducts())
     if (!user.id) {
       userManager.getUser().then(user => {
         if (user && !user.expired) {
@@ -49,7 +50,6 @@ function App() {
           dispatch(getUserCart(user.profile.sub))
           dispatch(getFavorites(user.profile.sub))
           dispatch(getOrders(user.profile.sub))
-          dispatch(fetchProducts())
           // Set the authorization header for axios
           axios.defaults.headers.common['Authorization'] = 'Bearer ' + user.access_token;
         }
