@@ -8,10 +8,6 @@ const CheckOutTwo = () => {
 
     const methods = useForm({})
 
-    const onSubmit = methods.handleSubmit(data => {
-        console.log(data)
-    })
-
     const fields = [
         'firstName',
         'lastName',
@@ -27,11 +23,11 @@ const CheckOutTwo = () => {
         'firstName':'Adınız',
         'lastName':'Soyadınız',
         'phone':'Telefon',
-        'email':'Adresiniz',
-        'cardNumber':'Numarası',
-        'expiryMonth':'Ayı',
-        'expiryYear':'Yılı',
-        'cvv':'CVV',
+        'email':'Email Adresi',
+        'cardNumber':'Kart Numarası',
+        'expiryMonth':'Son Kullanma Ayı',
+        'expiryYear':'Son Kullanma Yılı',
+        'cvv':'CVV'
     }
         
     return (
