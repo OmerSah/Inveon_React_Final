@@ -52,7 +52,7 @@ const TopHeader = (props) => {
                                         :
                                         <ul className="right_list_fix">
                                             
-                                            <li> AND Shop'a Hoşgeldiniz! </li>
+                                            <li className="after_login"> AND Shop'a Hoşgeldiniz! </li>
                                             <li className="after_login"><img src={avater} alt="avater" />
                                                 {user.name || 'İbrahim Gökyar'} <i className="fa fa-angle-down"></i>
                                                 <ul className="custom_dropdown">
