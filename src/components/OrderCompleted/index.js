@@ -14,7 +14,7 @@ const OrderComplete = () => {
                                     <h2>Siparişiniz Alınmıştır</h2>
                                 </div>
                                 <p>Siparişiniz için teşekkür ederiz! Siparişiniz hazırlanıyor... </p>
-                                <Link to="/shop" className="theme-btn-one bg-black btn_sm">Alışverişe Devam</Link>
+                                <Link to="/shop/shop-left-sidebar" className="theme-btn-one bg-black btn_sm">Alışverişe Devam</Link>
                             </div>
                         </div>
                     </div>

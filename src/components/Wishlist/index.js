@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
 import img from '../../assets/img/common/empty-cart.png'
-import { removeFromFavorites } from "../../app/slices/product";
+import { clearFavorites, removeFromFavorites } from "../../app/slices/product";
 
 const WishArea = () => {
     let dispatch = useDispatch();
@@ -14,7 +14,7 @@ const WishArea = () => {
     }
     // Clear
     const clearFav = () => {
-        dispatch({ type: "products/clearFav" });
+        dispatch(clearFavorites(user.id));
     }
 
     return (
@@ -82,7 +82,7 @@ const WishArea = () => {
                                 <div className="empaty_cart_area">
                                     <img src={img} alt="img" />
                                     <h2>Favoriniz YOK</h2>
-                                    <Link to="/shop" className="btn btn-black-overlay btn_sm">Alışverişe Devam</Link>
+                                    <Link to="/shop/shop-left-sidebar" className="btn btn-black-overlay btn_sm">Alışverişe Devam</Link>
                                 </div>
                             </div>
                         </div>

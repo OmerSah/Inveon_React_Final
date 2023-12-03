@@ -20,7 +20,7 @@ const BannerBottom = () => {
                                     <h4 className="color_one">Kış</h4>
                                     <h2>Yeni</h2>
                                     <h4>Koleksiyon</h4>
-                                    <Link to="/shop" className="theme-btn-one bg-black btn-sm">Satın Al</Link>
+                                    <Link to="/shop/shop-left-sidebar" className="theme-btn-one bg-black btn-sm">Satın Al</Link>
                                 </div>
                             </div>
                             <div className="product_variation_one_boxed img-zoom-hover">
@@ -29,7 +29,7 @@ const BannerBottom = () => {
                                     <h4 className="color_one">Kış</h4>
                                     <h2>Yeni</h2>
                                     <h4>Koleksiyon</h4>
-                                    <Link to="/shop" className="theme-btn-one bg-black btn-sm">Satın Al</Link>
+                                    <Link to="/shop/shop-left-sidebar" className="theme-btn-one bg-black btn-sm">Satın Al</Link>
                                 </div>
                             </div>
                         </div>
@@ -39,7 +39,7 @@ const BannerBottom = () => {
                                 <div className="product_var_one_text_center">
                                     <h2 className="color_one">%40 İndirim</h2>
                                     <h4>Seçili Ürünler </h4>
-                                    <Link to="/shop" className="theme-btn-one bg-black btn-sm">Satın Al</Link>
+                                    <Link to="/shop/shop-left-sidebar" className="theme-btn-one bg-black btn-sm">Satın Al</Link>
                                 </div>
                             </div>
                         </div>
@@ -49,7 +49,7 @@ const BannerBottom = () => {
                                 <div className="product_var_one_text_center">
                                     <h2 className="color_one">Yaz</h2>
                                     <h4>Fırsatları </h4>
-                                    <Link to="/shop" className="theme-btn-one bg-black btn-sm">Satın Al</Link>
+                                    <Link to="/shop/shop-left-sidebar" className="theme-btn-one bg-black btn-sm">Satın Al</Link>
                                 </div>
                             </div>
                             <div className="product_variation_one_boxed img-zoom-hover">
@@ -57,7 +57,7 @@ const BannerBottom = () => {
                                 <div className="product_var_one_text_center">
                                     <h2 className="color_one">Çocuk</h2>
                                     <h4>Ürünleri </h4>
-                                    <Link to="/shop" className="theme-btn-one bg-black btn-sm">Satın Al</Link>
+                                    <Link to="/shop/shop-left-sidebar" className="theme-btn-one bg-black btn-sm">Satın Al</Link>
                                 </div>
                             </div>
                         </div>

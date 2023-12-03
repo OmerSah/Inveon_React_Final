@@ -14,7 +14,7 @@ const Banner = () => {
                             Live For <span className="wow flipInX" 
                             data-wow-duration="2.0s" data-wow-delay=".5s">Fashion</span></h1>
                         <h3>Yüzde  50% İndirim</h3>
-                        <Link to="/shop" className="theme-btn-one bg-black btn_md">Satın Al</Link>
+                        <Link to="/shop/shop-left-sidebar" className="theme-btn-one bg-black btn_md">Satın Al</Link>
                     </div>
                 </div>
                 <div className="col-lg-6">
