@@ -30,7 +30,9 @@ const Order = () => {
                                         {new Intl.DateTimeFormat("tr-TR", {
                                             year: "numeric",
                                             month: "long",
-                                            day: "2-digit"
+                                            day: "2-digit",
+                                            hour: "numeric",
+                                            minute: "numeric",
                                         }).format(new Date(data.orderTime))}
                                     </td>
                                     <td><span className="badge badge-info">Tamamlandı</span></td>
