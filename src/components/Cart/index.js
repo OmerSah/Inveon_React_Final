@@ -57,7 +57,7 @@ const CartArea = () => {
                                                         </td>
                                                         <td className="product_thumb">
                                                             <Link to={`/product-details-two/${data.product.productId}`}>
-                                                                <img src={data.img} alt="img" />
+                                                                <img src={data.product.img} alt="img" />
                                                             </Link>
                                                         </td>
                                                         <td className="product_name">
