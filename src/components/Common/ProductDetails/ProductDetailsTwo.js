@@ -1,6 +1,6 @@
 import ProductInfo from './ProductInfo'
 import RelatedProduct from './RelatedProduct'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -21,9 +21,14 @@ const ProductDetailsTwo = () => {
     let user = useSelector((state) => state.user.user);
 
     useEffect(() => {
-        setCount(1)
-        dispatch(fetchProduct(id))
-    }, [dispatch, id]);
+        if (!product || product.productId != id) {
+            window.scrollTo(0, 0)
+            setCount(1)
+            dispatch(fetchProduct(id))
+            return
+        }
+        setImg(product.img)
+    }, [dispatch, id, product]);
 
     // Add to cart
     const sepeteEkle = async () => {
@@ -50,8 +55,8 @@ const ProductDetailsTwo = () => {
     }
     const [img, setImg] = useState()
     const colorSwatch = (i) => {
-        let data = product.color.find(item => item.color === i)
-        setImg(data.img)
+        let data = product.colors.find(item => item.color === i)
+        setImg(data.image)
     }
 
     let settings = {
@@ -91,7 +96,7 @@ const ProductDetailsTwo = () => {
                                         {
                                             product.colors.map((item, index) => (
                                                 <div className="product_img_two_slider" key={index}>
-                                                    <img src={item.img} alt="img" />
+                                                    <img src={item.image} alt="img" />
                                                 </div>
                                             ))
                                         }
@@ -181,7 +186,7 @@ const ProductDetailsTwo = () => {
                             <div className="empaty_cart_area">
                                 <img src={img} alt="img" />
                                 <h2>Ürün Bulunamadı</h2>
-                                <Link to="/shop" className="btn btn-black-overlay btn_sm">Alışverişe Devam</Link>
+                                <Link to="/shop/shop-left-sidebar" className="btn btn-black-overlay btn_sm">Alışverişe Devam</Link>
                             </div>
                         </div>
                     </div>
