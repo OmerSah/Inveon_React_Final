@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 // Import Img
-import search from '../../assets/img/svg/search.svg'
+import searchImage from '../../assets/img/svg/search.svg'
 import { set } from 'react-hook-form'
 
 
-const SideBar = ({ chooseCategory, chooseLabel, chooseMaxPrice }) => {
+const SideBar = ({ chooseCategory, chooseLabel, chooseMaxPrice, chooseSearch }) => {
 
     const categories = [
         "T-shirts",
@@ -49,6 +49,7 @@ const SideBar = ({ chooseCategory, chooseLabel, chooseMaxPrice }) => {
     const [category, setCategory] = useState()
     const [label, setLabel] = useState()
     const [maxPrice, setMaxPrice] = useState(100)
+    const [search, setSearch] = useState()
 
     const onCategoryChange = e => {
         chooseCategory(e.target.value)
@@ -63,6 +64,11 @@ const SideBar = ({ chooseCategory, chooseLabel, chooseMaxPrice }) => {
     const onMaxPriceChange = e => {
         chooseMaxPrice(e.target.value)
         setMaxPrice(e.target.value)
+    }
+
+    const onSearchChange = e => {
+        chooseSearch(e.target.value)
+        setSearch(e.target.value)
     }
 
     const clearFilters = () => {
@@ -81,8 +87,8 @@ const SideBar = ({ chooseCategory, chooseLabel, chooseMaxPrice }) => {
                     <div className="shop_Search">
                         <form>
 
-                            <input type="text" className="form-control" placeholder="Ara..."  />
-                            <button><img src={search} alt="img" /></button>
+                            <input type="text" className="form-control" placeholder="Ara..." onChange={onSearchChange} />
+                            <button><img src={searchImage} alt="img" /></button>
                         </form>
                     </div>
                     <div className="shop_sidebar_boxed">

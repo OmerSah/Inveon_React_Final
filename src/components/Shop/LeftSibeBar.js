@@ -21,6 +21,7 @@ const LeftSideBar = () => {
     const [label, setLabel] = useState();
     const [maxPrice, setMaxPrice] = useState(100);
     const [totalPage, setTotalPage] = useState(0);
+    const [search, setSearch] = useState();
 
     const chooseCategory = (category) => {
         setCategory(category);
@@ -28,6 +29,10 @@ const LeftSideBar = () => {
 
     const chooseLabel = (label) => {
         setLabel(label);
+    };
+
+    const chooseSearch = (search) => {
+        setSearch(search);
     };
 
     const chooseMaxPrice = (maxPrice) => {
@@ -44,15 +49,16 @@ const LeftSideBar = () => {
         data = category ? allData.filter((product) => product.category === category) : allData;
         data = label ? data.filter((product) => product.labels === label) : data;
         data = data.filter((product) => product.price < maxPrice)
+        data = search ? data.filter((product) => product.title.includes(search)) : data;
         setProducts(data);
-    }, [category, label, maxPrice])
+    }, [category, label, maxPrice, search])
 
     return (
         <>
             <section id="shop_main_area" className="ptb-100">
                 <div className="container">
                     <div className="row">
-                        <SideBar chooseCategory={chooseCategory} chooseLabel={chooseLabel} chooseMaxPrice={chooseMaxPrice}/>
+                        <SideBar chooseCategory={chooseCategory} chooseLabel={chooseLabel} chooseMaxPrice={chooseMaxPrice} chooseSearch={chooseSearch}/>
                         <div className="col-lg-9">
                             <div className="row">
                                 {products.slice((page - 1) * itemPerPage, page * itemPerPage).map((data, index) => (
